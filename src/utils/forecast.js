@@ -5,12 +5,16 @@ const forecast = (longtidute, latidute, callback) => {
 
     //{ url: url, json: true } using method shorthand below
     request({ url, json: true }, (error, { body }) => {
-        if (error){
+        if (error) {
             callback('Unable to connect to weather services', undefined);
-        }else if (body.error){
+        } else if (body.error) {
             callback('Unable to find location, error code:' + body.code, undefined);
-        }else{
-            callback(undefined, `${body.daily.data[0].summary} It is currently ${body.currently.temperature} degrees Celsius out. There is a ${body.currently.precipProbability}% of rain`);
+        } else {
+            callback(undefined, `${body.daily.data[0].summary} 
+            It is currently ${body.currently.temperature} degrees Celsius out. 
+            There is a ${body.currently.precipProbability}% of rain. 
+            Highest temperature throughout the day will be ${body.daily.data[0].temperatureHigh} 
+            and lowest ${body.daily.data[0].temperatureLow} degrees Celsius`);
         }
     })
 }
